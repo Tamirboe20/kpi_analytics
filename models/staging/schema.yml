@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: thelook_ecommerce
+    database: bigquery-public-data
+    schema: thelook_ecommerce
+    tables:
+      - name: orders
+      - name: users
+      - name: order_items
+      - name: products
+
+models:
+  - name: stg_orders
+    description: "Staging model for orders table"
+    columns:
+      - name: order_id
+        description: "Primary key of the order"
+        tests: [not_null, unique]
+      - name: user_id
+        description: "ID of the user who made the order"
+        tests: [not_null]
+      - name: created_at
+        description: "Timestamp of the order"
+        tests: [not_null]
+      - name: status
+        description: "Order status"
